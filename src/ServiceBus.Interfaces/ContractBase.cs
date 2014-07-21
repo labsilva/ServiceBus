@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServiceBus
 {
+    [Serializable] 
     public class ContractBase
     {
 

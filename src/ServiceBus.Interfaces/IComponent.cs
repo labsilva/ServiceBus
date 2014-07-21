@@ -11,6 +11,7 @@ namespace ServiceBus
 
         bool Parallel { get; set; }
 
+        TOutput RunWorker(TInput input);
 
     }
 }
