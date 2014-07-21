@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServiceBus
 {
-    public interface IComponent
+    public interface IComponent<TInput, TOutput>
     {
 
         bool Parallel { get; set; }

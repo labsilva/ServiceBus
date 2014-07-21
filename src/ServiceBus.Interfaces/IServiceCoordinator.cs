@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace ServiceBus
 {
-    public interface IServiceCoordinator
+    public interface IServiceCoordinator<TInput, TOutput>
     {
 
-        SortedList<string, IComponent> Pipeline { get; }
+        SortedList<string, IComponent<TInput, TOutput>> Pipeline { get; }
 
     }
 }
