@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,12 @@ namespace ServiceBus
 
         public MethodInfo DetermineMethod(IComponent component)
         {
-            return component.GetType().GetMethods().Where(m => m.IsPublic && m.Name == "Execute" && m.GetCustomAttribute(typeof(ComponentActionAttribute)) != null).First();
+            if (component == null) throw new ArgumentNullException("component");
+            var mi = component.GetType().GetMethods().Where(m => m.IsPublic && m.Name == "Execute" && m.GetCustomAttribute(typeof(ComponentActionAttribute)) != null);
+            if (!mi.Any())
+                throw new MissingMethodException("No method Execute with custom attribute ComponentAction found on {0}", component.GetType().FullName);
+            else
+                return mi.First();
         }
 
         public IDictionary<string, object> DetermineArguments(MethodInfo method, dynamic state)

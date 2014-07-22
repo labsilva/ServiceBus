@@ -6,7 +6,7 @@
     <ProjectGuid>{DC5D8350-DC65-40B4-9FBF-63AAB8BEA2DC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ServiceBus.Tests</RootNamespace>
+    <RootNamespace>ServiceBus</RootNamespace>
     <AssemblyName>ServiceBus.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -56,9 +56,20 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleServiceCoordinatorFacts.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ServiceBus.Interfaces\ServiceBus.Interfaces.csproj">
+      <Project>{2fd02a4b-7b87-42a7-963d-c66e9583c832}</Project>
+      <Name>ServiceBus.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\ServiceBus\ServiceBus.csproj">
+      <Project>{ba268d42-76c9-4821-9cdc-b11d18e5f6ad}</Project>
+      <Name>ServiceBus</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
