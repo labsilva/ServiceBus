@@ -12,7 +12,7 @@ namespace ServiceBus
 {
     public class SimpleServiceCoordinator : IServiceCoordinator
     {
-        public CoordinatorResult ExecuteComponent(IComponent component, ExpandoObject state)
+        public virtual CoordinatorResult ExecuteComponent(IComponent component, ExpandoObject state)
         {
             MethodInfo method = DetermineMethod(component);
             var arguments = DetermineArguments(method, (object)state);
@@ -25,7 +25,7 @@ namespace ServiceBus
             return null;
         }
 
-        public MethodInfo DetermineMethod(IComponent component)
+        public virtual MethodInfo DetermineMethod(IComponent component)
         {
             if (component == null) throw new ArgumentNullException("component");
             var mi = component.GetType().GetMethods().Where(m => m.IsPublic && m.Name == "Execute" && m.GetCustomAttribute(typeof(ComponentActionAttribute)) != null);
@@ -35,7 +35,7 @@ namespace ServiceBus
                 return mi.First();
         }
 
-        public IDictionary<string, object> DetermineArguments(MethodInfo method, dynamic state)
+        public virtual IDictionary<string, object> DetermineArguments(MethodInfo method, dynamic state)
         {
             IDictionary<string, object> dict = new Dictionary<string, object>();
             var args = method.GetParameters().Select(t => t.Name).ToList();
@@ -49,12 +49,12 @@ namespace ServiceBus
             return dict;
         }
 
-        public IDictionary<string, object> DetermineResult(object res)
+        public virtual IDictionary<string, object> DetermineResult(object result)
         {
             IDictionary<string, object> dict = new Dictionary<string, object>();
-            res.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty).ToList().ForEach(t =>
+            result.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty).ToList().ForEach(t =>
             {
-                dict.Add(t.Name, t.GetValue(res));
+                dict.Add(t.Name, t.GetValue(result));
             });
             return dict;
         }
