@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Dynamic;
+
 namespace ServiceBus
 {
-    public interface IServiceCoordinator<TInput, TOutput>
+    public interface IServiceCoordinator
     {
-
-        SortedList<string, IComponent<TInput, TOutput>> Pipeline { get; }
-
+        CoordinatorResult ExecuteComponent(IComponent component, ExpandoObject state);
     }
 }

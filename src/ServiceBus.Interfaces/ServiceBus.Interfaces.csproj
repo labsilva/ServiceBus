@@ -39,11 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComponentAction.cs" />
     <Compile Include="ContractBase.cs" />
+    <Compile Include="CoordinatorResult.cs" />
     <Compile Include="IComponent.cs" />
     <Compile Include="IDependencyResolver.cs" />
+    <Compile Include="IServiceBus.cs" />
     <Compile Include="IServiceCoordinator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Expando.cs" />
+    <Compile Include="ServiceBusBaseState.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

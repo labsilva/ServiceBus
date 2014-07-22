@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{66444CF1-87B7-41A8-86D8-A2D5521690E1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E8F00869-8131-4493-B2CB-69FB25A3CBFC}"
@@ -20,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7C8BC0
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBus.Tests", "tests\ServiceBus.Tests\ServiceBus.Tests.csproj", "{DC5D8350-DC65-40B4-9FBF-63AAB8BEA2DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +34,10 @@ Global
 		{BA268D42-76C9-4821-9CDC-B11D18E5F6AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA268D42-76C9-4821-9CDC-B11D18E5F6AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA268D42-76C9-4821-9CDC-B11D18E5F6AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC5D8350-DC65-40B4-9FBF-63AAB8BEA2DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC5D8350-DC65-40B4-9FBF-63AAB8BEA2DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC5D8350-DC65-40B4-9FBF-63AAB8BEA2DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC5D8350-DC65-40B4-9FBF-63AAB8BEA2DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,5 +45,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2FD02A4B-7B87-42A7-963D-C66E9583C832} = {66444CF1-87B7-41A8-86D8-A2D5521690E1}
 		{BA268D42-76C9-4821-9CDC-B11D18E5F6AD} = {66444CF1-87B7-41A8-86D8-A2D5521690E1}
+		{DC5D8350-DC65-40B4-9FBF-63AAB8BEA2DC} = {E8F00869-8131-4493-B2CB-69FB25A3CBFC}
 	EndGlobalSection
 EndGlobal

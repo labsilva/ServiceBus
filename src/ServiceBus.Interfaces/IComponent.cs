@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace ServiceBus
 {
-    public interface IComponent<TInput, TOutput>
+    public interface IComponent
     {
-
-        bool Parallel { get; set; }
-
-        TOutput RunWorker(TInput input);
-
+        bool Parallel { get; }
+        //Type ContractInput { get; }
+        //Type ContractOutput { get; }
+        //object Execute(object input);
     }
 }
