@@ -11,6 +11,6 @@ namespace ServiceBus
 {
     public interface IServiceCoordinator
     {
-        CoordinatorResult ExecuteComponent(IComponent component, ExpandoObject state);
+        CoordinatorResult ExecuteComponent(IComponent component, object state);
     }
 }

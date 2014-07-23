@@ -8,49 +8,19 @@ using System.Dynamic;
 
 namespace ServiceBus
 {
-    public class ServiceBusBaseState : DynamicObject
+    public class ServiceBusBaseState
     {
 
-        public Dictionary<string, object> Properties { get; set; }
-
-        public ServiceBusBaseState() : this(null) { }
-
-        public ServiceBusBaseState(Dictionary<string, object> properties)
+        public ServiceBusBaseState()
         {
-            if(properties == null) properties = new Dictionary<string,object>();
-            Properties = properties;
+            OperationGuid = Guid.NewGuid();
+            OperationStartTimestamp = DateTime.Now;
         }
 
-        public override IEnumerable<string> GetDynamicMemberNames()
-        {
-            return Properties.Keys;
-        }
+        public Guid OperationGuid { get; set; }
+        public DateTime OperationStartTimestamp { get; set; }
+        public DateTime? OperationFinishTimestamp { get; set; }
+        public TimeSpan OperationDuration { get { return (OperationFinishTimestamp == null ? DateTime.Now : OperationFinishTimestamp.Value).Subtract(OperationStartTimestamp); } }
 
-        public override bool TryGetMember(GetMemberBinder binder, out object result)
-        {
-            if (Properties.ContainsKey(binder.Name))
-            {
-                result = Properties[binder.Name];
-                return true;
-            }
-            else
-            {
-                result = null;
-                return false;
-            }
-        }
-
-        public override bool TrySetMember(SetMemberBinder binder, object value)
-        {
-            if (Properties.ContainsKey(binder.Name))
-            {
-                Properties[binder.Name] = value;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
     }
 }

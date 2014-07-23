@@ -7,12 +7,12 @@ using System.Dynamic;
 
 namespace ServiceBus
 {
-    public interface IServiceBus 
+    public interface IServiceBus<TState> where TState : ServiceBusBaseState, new()
     {
         void Initialize();
         SortedList<int, IComponent> Pipeline { get; set; }
         IComponent CurrentComponent { get; }
-        dynamic State { get; }
+        TState State { get; }
         void Execute();
     }
 }

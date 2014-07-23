@@ -12,15 +12,23 @@ namespace ServiceBus
 {
     public class SimpleServiceCoordinator : IServiceCoordinator
     {
-        public virtual CoordinatorResult ExecuteComponent(IComponent component, ExpandoObject state)
+        public virtual CoordinatorResult ExecuteComponent(IComponent component, object state)
         {
             MethodInfo method = DetermineMethod(component);
             var arguments = DetermineArguments(method, (object)state);
             var res = method.Invoke(component, arguments.Select(t => t.Value).ToArray());
+
+            if (res == null)
+                throw new NullComponentResultException(method.DeclaringType.Name);
+
             var props = DetermineResult(res);
             foreach (var p in props)
             {
-                (state as IDictionary<string, object>).Add(p.Key, p.Value);
+                var prop = state.GetType().GetProperty(p.Key);
+                if (prop != null)
+                    prop.SetValue(state, p.Value);
+                else
+                    throw new MissingMemberException(string.Format("Error while accessing property {0}", p.Key));
             }
             return null;
         }
@@ -41,10 +49,7 @@ namespace ServiceBus
             var args = method.GetParameters().Select(t => t.Name).ToList();
             args.ForEach(t =>
             {
-                if (state.GetType() == typeof(ExpandoObject))
-                    dict.Add(t, ((IDictionary<string, object>)state).ToDictionary(k=> k.Key.ToLower(), v=> v.Value)[t.ToLower()]);
-                else
-                    dict.Add(t, state.GetType().GetProperty(t, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance).GetValue(state));
+                dict.Add(t, state.GetType().GetProperty(t, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance).GetValue(state));
             });
             return dict;
         }
